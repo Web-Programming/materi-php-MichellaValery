@@ -65,6 +65,7 @@
                     <table class="table table-bordered table-striped">
                       <thead>
                         <tr>
+                          <th>Logo</th>
                           <th>No</th>
                           <th>Nama Prodi</th>
                           <th>Kode Prodi</th>
@@ -78,13 +79,21 @@
                             <td>{{ $prodi->nama }}</td>
                             <td>{{ $prodi->kode_prodi }}</td>
                             <td>
-                              <a href="{{ url('prodi/'.$prodi->id.'/edit') }}" >Edit</a>
-                              <form action="{{ url('prodi/'.$prodi->id) }}" method="post">
+                              <a href="{{ url('prodi/'.$prodi->id.'/edit') }}" class="btn btn-success btn-sm">Edit</a>
+                              <a href="{{ url('prodi/'.$prodi->id) }}" class="btn btn-secondary btn-sm">Detail</a>
+                              <form action="{{ url('prodi/'.$prodi->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-link">Delete</button>
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus prodi ini?')">Delete</button>
                               </form>
                             </td>
+                            <td>
+                            @if ($prodi->logo)
+                              <img src="{{ asset('storage/' . $prodi->logo) }}" alt="Logo" width="50">
+                            @else
+                              -
+                            @endif
+                          </td>
                           </tr>
                         @endforeach
                       </tbody>                 
